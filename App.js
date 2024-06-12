@@ -13,6 +13,22 @@ app.post("/add",(req,res)=>{
     console.log(addph)
     res.json({"status":"success"})
 })
+
+
+app.post("/search",(req,res)=>{
+    let input=req.body
+    let addph=new addphmodel(input)
+    addphmodel.find(input).then(
+        (data)=>{
+            res.json(data)
+        }  
+    ).catch(
+        (error)=>{
+            res.json(error)
+        }
+    )
+})
+
 app.post("/view",(req,res)=>{
     addphmodel.find().then(
         (data)=>{
