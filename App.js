@@ -13,6 +13,17 @@ app.post("/add",(req,res)=>{
     console.log(addph)
     res.json({"status":"success"})
 })
+app.post("/view",(req,res)=>{
+    addphmodel.find().then(
+        (data)=>{
+            res.json(data)
+        }
+    ).catch(
+        (error)=>{
+            res.json(error)
+        }
+    )
+})
 app.listen(8068,()=>{
     console.log("server started")
 })
