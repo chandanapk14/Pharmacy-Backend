@@ -6,6 +6,9 @@ app.use(cors())
 app.use(express.json())
 const {addphmodel}=require("./models/addph")
 mongoose.connect("mongodb+srv://Chandanapk:vishnuchandu1357@cluster0.bemah3y.mongodb.net/pharmacyDB?retryWrites=true&w=majority&appName=Cluster0")
+
+
+
 app.post("/add",(req,res)=>{
     let input=req.body
     let addph=new addphmodel(input)
@@ -28,6 +31,21 @@ app.post("/search",(req,res)=>{
         }
     )
 })
+
+
+app.post("/delete",(req,res)=>
+    {
+        let input=req.body
+        addphmodel.findByIdAndDelete(input._id).then(
+            (response)=>{
+                res.json({"status":"success"})
+            }
+        ).catch(
+            (error)=>{
+                res.json({"status":"error"})
+            }
+        )
+    })
 
 app.post("/view",(req,res)=>{
     addphmodel.find().then(
